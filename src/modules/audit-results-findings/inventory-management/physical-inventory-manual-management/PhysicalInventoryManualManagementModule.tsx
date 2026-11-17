@@ -211,34 +211,6 @@ export function PhysicalInventoryManualManagementModule(props: Props) {
     const [isRebuildingGroups, setIsRebuildingGroups] = React.useState(false);
     const [isSavingDetailBatch, setIsSavingDetailBatch] = React.useState(false);
     const [openAddProductDialog, setOpenAddProductDialog] = React.useState(false);
-    const [isScrolled, setIsScrolled] = React.useState(false);
-
-    React.useEffect(() => {
-        let ticking = false;
-
-        const handleScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    const sentinel = document.getElementById("pi-manual-product-finder-sentinel");
-                    if (sentinel) {
-                        const rect = sentinel.getBoundingClientRect();
-                        const shouldBeScrolled = rect.bottom < 0;
-
-                        setIsScrolled(prev => {
-                            if (prev !== shouldBeScrolled) return shouldBeScrolled;
-                            return prev;
-                        });
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-
-        document.addEventListener("scroll", handleScroll, { capture: true, passive: true });
-        return () => document.removeEventListener("scroll", handleScroll, true);
-    }, []);
-
     const [branches, setBranches] = React.useState<BranchRow[]>([]);
     const [suppliers, setSuppliers] = React.useState<SupplierRow[]>([]);
     const [categories, setCategories] = React.useState<CategoryRow[]>([]);
@@ -1344,7 +1316,7 @@ export function PhysicalInventoryManualManagementModule(props: Props) {
     }
 
     return (
-        <div className="space-y-4">
+        <div className={cn("space-y-4", groupedRows.length > 0 && "pb-24")}>
             <div className="rounded-2xl border bg-background px-3 py-3 shadow-sm sm:px-4">
                 <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:justify-between">
                     <div className="space-y-1">
@@ -1844,8 +1816,7 @@ export function PhysicalInventoryManualManagementModule(props: Props) {
             {groupedRows.length > 0 && (
                 <div
                     className={cn(
-                        "fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-xl px-4 pointer-events-none transition-all duration-500 ease-in-out",
-                        isScrolled ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-20 scale-90"
+                        "fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] w-full max-w-xl px-4 pointer-events-none",
                     )}
                 >
                     <div className="flex items-center gap-3 bg-background/95 backdrop-blur-xl border border-primary/20 shadow-[0_-10px_50px_rgba(0,0,0,0.25)] rounded-full p-2 ring-1 ring-black/5 pointer-events-auto">
