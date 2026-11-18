@@ -68,6 +68,7 @@ import {
     Ban,
     Boxes,
     ClipboardList,
+    FileSpreadsheet,
     Loader2,
     Plus,
     Printer,
@@ -84,6 +85,7 @@ import {
     PhysicalInventoryTable,
 } from "./components";
 import { printAuditSheet } from "../physical-inventory-management/utils/printAuditSheet";
+import { exportAuditSheetToExcel } from "./utils/exportAuditSheetToExcel";
 
 type Props = {
     initialHeaderId?: number | null;
@@ -1398,6 +1400,20 @@ export function PhysicalInventoryManualManagementModule(props: Props) {
                         >
                             <Printer className="mr-2 h-4 w-4" />
                             Print Audit Sheet
+                        </Button>
+                        <Button
+                            variant="outline"
+                            className="cursor-pointer border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:border-emerald-900/60 dark:bg-emerald-950/30 dark:text-emerald-300"
+                            onClick={() => {
+                                const branchName = branches.find((b) => b.id == (filters.branch_id ?? header.branch_id))?.branch_name ?? "";
+                                const supplierName = suppliers.find((s) => s.id == (filters.supplier_id ?? header.supplier_id))?.supplier_name ?? "";
+                                const priceTypeName = priceTypes.find((pt) => pt.price_type_id == (filters.price_type_id ?? header.price_type))?.price_type_name ?? "";
+                                void exportAuditSheetToExcel({ header, groupedRows, branchName, supplierName, priceTypeName });
+                            }}
+                            disabled={!hasLoadedDetails}
+                        >
+                            <FileSpreadsheet className="mr-2 h-4 w-4" />
+                            Export Excel
                         </Button>
                     </div>
                 </div>
