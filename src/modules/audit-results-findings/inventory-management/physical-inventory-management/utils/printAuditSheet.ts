@@ -87,8 +87,9 @@ export function printAuditSheet(args: PrintAuditSheetArgs): void {
                 <table>
                     <thead>
                         <tr>
-                            <th class="col-description" style="width: 30%">DESCRIPTION</th>
+                            <th class="col-description" style="width: 25%">DESCRIPTION</th>
                             <th class="col-system" style="width: 14%">SYSTEM</th>
+                            <th class="col-physical" style="width: 14%">PHYSICAL COUNT</th>
                             ${hasBox ? `<th style="width: ${inputColWidth}%">BOX</th>` : ""}
                             ${hasPack ? `<th style="width: ${inputColWidth}%">PACK</th>` : ""}
                             ${hasTie ? `<th style="width: ${inputColWidth}%">TIE</th>` : ""}
@@ -107,6 +108,9 @@ export function printAuditSheet(args: PrintAuditSheetArgs): void {
                     return `<div class="system-line">${countStr} ${escapeHtml(unitStr)}</div>`;
                 })
                 .join("") || "0";
+            const physicalDisplay = row.rows
+                .map(child => `${fmtNumber(child.physical_count)} ${escapeHtml(child.unit_shortcut || child.unit_name || "PCS")}`)
+                .join("<br>");
 
             const boxLabel = row.boxUnit ? (row.boxUnit.unit_shortcut || row.boxUnit.unit_name || "Box") : "";
             const packLabel = row.packUnit ? (row.packUnit.unit_shortcut || row.packUnit.unit_name || "Pack") : "";
@@ -117,6 +121,7 @@ export function printAuditSheet(args: PrintAuditSheetArgs): void {
                 <tr>
                     <td class="description-cell">${escapeHtml(row.base_product_name)}</td>
                     <td class="system-cell">${systemDisplay}</td>
+                    <td class="physical-cell">${physicalDisplay}</td>
                     ${hasBox ? `<td class="input-cell">${boxLabel ? `<span class="input-label">${escapeHtml(boxLabel)}</span>` : ""}</td>` : ""}
                     ${hasPack ? `<td class="input-cell">${packLabel ? `<span class="input-label">${escapeHtml(packLabel)}</span>` : ""}</td>` : ""}
                     ${hasTie ? `<td class="input-cell">${tieLabel ? `<span class="input-label">${escapeHtml(tieLabel)}</span>` : ""}</td>` : ""}
@@ -235,6 +240,8 @@ export function printAuditSheet(args: PrintAuditSheetArgs): void {
             text-align: right;
             font-weight: normal;
         }
+
+        .physical-cell { text-align: right; white-space: nowrap; }
 
         .system-line {
             white-space: nowrap;
