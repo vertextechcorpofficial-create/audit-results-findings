@@ -281,7 +281,7 @@ export function AuditResolutionSheet({ audit, open, onOpenChange, onSuccess }: A
                                     <SelectItem value="PENDING_REVIEW">Pending Review</SelectItem>
                                     <SelectItem value="APPROVED_FOR_DEDUCTION" className="text-blue-600 font-bold">Approve for Deduction</SelectItem>
                                     <SelectItem value="SETTLED_CASH" className="text-emerald-600 font-bold">Mark as Settled (Cash Paid)</SelectItem>
-                                    <SelectItem value="DEDUCTED_PAYROLL" className="text-slate-600 font-bold">Mark as Deducted (Payroll)</SelectItem>
+                                    <SelectItem value="DEDUCTED_PAYROLL" className="text-muted-foreground font-bold">Mark as Deducted (Payroll)</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -290,11 +290,11 @@ export function AuditResolutionSheet({ audit, open, onOpenChange, onSuccess }: A
                             <div className="space-y-2 animate-in slide-in-from-top-2">
                                 <label className="text-[10px] font-black uppercase text-muted-foreground">Select Recovery Method:</label>
                                 <div className="grid grid-cols-2 gap-3">
-                                    <Button type="button" variant="outline" className={`h-16 flex flex-col items-center justify-center gap-1 border-2 transition-all ${settlementMethod === "CASH" ? "border-emerald-500 bg-emerald-50 text-emerald-700" : "border-border hover:bg-muted"}`} onClick={() => setSettlementMethod("CASH")}>
+                                    <Button type="button" variant="outline" className={`h-16 flex flex-col items-center justify-center gap-1 border-2 transition-all ${settlementMethod === "CASH" ? "border-emerald-500 bg-emerald-500/10 text-emerald-700" : "border-border hover:bg-muted"}`} onClick={() => setSettlementMethod("CASH")}>
                                         <Banknote className="w-5 h-5" />
                                         <span className="text-[9px] font-black uppercase tracking-widest">Cash Recovery</span>
                                     </Button>
-                                    <Button type="button" variant="outline" className={`h-16 flex flex-col items-center justify-center gap-1 border-2 transition-all ${settlementMethod === "PAYROLL_DEDUCTION" ? "border-blue-500 bg-blue-50 text-blue-700" : "border-border hover:bg-muted"}`} onClick={() => setSettlementMethod("PAYROLL_DEDUCTION")}>
+                                    <Button type="button" variant="outline" className={`h-16 flex flex-col items-center justify-center gap-1 border-2 transition-all ${settlementMethod === "PAYROLL_DEDUCTION" ? "border-blue-500 bg-blue-500/10 text-blue-700" : "border-border hover:bg-muted"}`} onClick={() => setSettlementMethod("PAYROLL_DEDUCTION")}>
                                         <Receipt className="w-5 h-5" />
                                         <span className="text-[9px] font-black uppercase tracking-widest">Payroll Deduction</span>
                                     </Button>

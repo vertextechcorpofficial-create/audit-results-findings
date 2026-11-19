@@ -50,10 +50,10 @@ export default function RemittanceAuditModule() {
 
     const getStatusBadge = (status: string) => {
         switch (status) {
-            case "PENDING_REVIEW": return <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-200 border-none font-black text-[9px] uppercase"><AlertCircle className="w-3 h-3 mr-1" /> Pending</Badge>;
-            case "APPROVED_FOR_DEDUCTION": return <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200 border-none font-black text-[9px] uppercase"><ShieldAlert className="w-3 h-3 mr-1" /> For Deduction</Badge>;
-            case "SETTLED_CASH": return <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-200 border-none font-black text-[9px] uppercase"><CheckCircle2 className="w-3 h-3 mr-1" /> Cash Settled</Badge>;
-            case "DEDUCTED_PAYROLL": return <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-200 border-none font-black text-[9px] uppercase"><Receipt className="w-3 h-3 mr-1" /> Payroll Settled</Badge>;
+            case "PENDING_REVIEW": return <Badge className="bg-amber-500/15 text-amber-700 hover:bg-amber-500/100/25 border-none font-black text-[9px] uppercase"><AlertCircle className="w-3 h-3 mr-1" /> Pending</Badge>;
+            case "APPROVED_FOR_DEDUCTION": return <Badge className="bg-blue-500/15 text-blue-700 hover:bg-blue-500/100/25 border-none font-black text-[9px] uppercase"><ShieldAlert className="w-3 h-3 mr-1" /> For Deduction</Badge>;
+            case "SETTLED_CASH": return <Badge className="bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/100/25 border-none font-black text-[9px] uppercase"><CheckCircle2 className="w-3 h-3 mr-1" /> Cash Settled</Badge>;
+            case "DEDUCTED_PAYROLL": return <Badge className="bg-muted text-foreground hover:bg-accent border-none font-black text-[9px] uppercase"><Receipt className="w-3 h-3 mr-1" /> Payroll Settled</Badge>;
             default: return <Badge variant="outline">{status}</Badge>;
         }
     };
@@ -77,13 +77,13 @@ export default function RemittanceAuditModule() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Card className="shadow-sm border-amber-200 bg-amber-50/50">
+                <Card className="shadow-sm border-amber-500/30 bg-amber-500/10">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-[10px] font-black uppercase text-amber-700 tracking-widest">Pending Reviews</CardTitle>
                         <Clock className="h-4 w-4 text-amber-500 opacity-50" />
                     </CardHeader>
                     <CardContent>
-                        {loadingKpis ? <div className="h-8 w-12 bg-amber-200/50 rounded animate-pulse" /> : <div className="text-2xl font-black text-amber-700">{kpis.pendingCount}</div>}
+                        {loadingKpis ? <div className="h-8 w-12 bg-amber-500/10 rounded animate-pulse" /> : <div className="text-2xl font-black text-amber-700">{kpis.pendingCount}</div>}
                         <p className="text-xs text-amber-600/70 font-bold mt-1">Requires immediate action</p>
                     </CardContent>
                 </Card>
@@ -101,13 +101,13 @@ export default function RemittanceAuditModule() {
                         <p className="text-xs text-destructive/70 font-bold mt-1">Unrecovered funds</p>
                     </CardContent>
                 </Card>
-                <Card className="shadow-sm border-emerald-200 bg-emerald-50/50">
+                <Card className="shadow-sm border-emerald-500/30 bg-emerald-500/10">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-[10px] font-black uppercase text-emerald-700 tracking-widest">Resolved Audits</CardTitle>
                         <CheckCircle className="h-4 w-4 text-emerald-500 opacity-50" />
                     </CardHeader>
                     <CardContent>
-                        {loadingKpis ? <div className="h-8 w-12 bg-emerald-200/50 rounded animate-pulse" /> : <div className="text-2xl font-black text-emerald-700">{kpis.resolvedCount}</div>}
+                        {loadingKpis ? <div className="h-8 w-12 bg-emerald-500/10 rounded animate-pulse" /> : <div className="text-2xl font-black text-emerald-700">{kpis.resolvedCount}</div>}
                         <p className="text-xs text-emerald-600/70 font-bold mt-1">Settled or sent to payroll</p>
                     </CardContent>
                 </Card>
@@ -122,7 +122,7 @@ export default function RemittanceAuditModule() {
                             <TabsTrigger value="APPROVED_FOR_DEDUCTION" className="text-xs font-bold uppercase text-blue-600 shrink-0">Deduction Auth</TabsTrigger>
                             <TabsTrigger value="SETTLED_CASH" className="text-xs font-bold uppercase text-emerald-600 shrink-0">Settled (Cash)</TabsTrigger>
                             {/* 🚀 NEW: Settled via Payroll Tab */}
-                            <TabsTrigger value="DEDUCTED_PAYROLL" className="text-xs font-bold uppercase text-slate-600 shrink-0">Settled (Payroll)</TabsTrigger>
+                            <TabsTrigger value="DEDUCTED_PAYROLL" className="text-xs font-bold uppercase text-muted-foreground shrink-0">Settled (Payroll)</TabsTrigger>
                         </TabsList>
                     </Tabs>
 
