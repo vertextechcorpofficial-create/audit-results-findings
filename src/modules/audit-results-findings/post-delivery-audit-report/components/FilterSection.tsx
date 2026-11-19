@@ -33,22 +33,22 @@ export function FilterSection({
   setSortBy,
 }: FilterSectionProps) {
   return (
-    <div className="p-6 border-b border-slate-100 flex flex-col gap-4 bg-white">
+    <div className="p-6 border-b border-border flex flex-col gap-4 bg-card">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-          <FileText className="text-slate-400" size={20} />
+        <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+          <FileText className="text-muted-foreground" size={20} />
           Posted Dispatch Plans
         </h2>
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <div className="relative flex-1 sm:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
             <input 
               type="text" 
               placeholder="Search Dispatch No..." 
               value={searchDispatchNo}
               onChange={(e) => setSearchDispatchNo(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+              className="w-full pl-9 pr-4 py-2 bg-muted border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/25"
             />
           </div>
           <Button onClick={handleSearch} variant="secondary" className="rounded-xl shrink-0">Search</Button>
@@ -67,8 +67,8 @@ export function FilterSection({
           className="flex-1 min-w-[200px]"
         />
 
-        <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 flex-1 min-w-[280px]">
-          <span className="text-xs font-bold text-slate-400 uppercase">Date:</span>
+        <div className="flex items-center gap-2 bg-muted border border-border rounded-lg px-3 py-2 flex-1 min-w-[280px]">
+          <span className="text-xs font-bold text-muted-foreground uppercase">Date:</span>
           <input 
             type="date" 
             value={dateFrom}
@@ -113,3 +113,4 @@ export function FilterSection({
     </div>
   );
 }
+

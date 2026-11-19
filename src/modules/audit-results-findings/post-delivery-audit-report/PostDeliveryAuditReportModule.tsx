@@ -179,14 +179,14 @@ export default function PostDeliveryAuditReportModule() {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto min-h-screen bg-slate-50">
+    <div className="p-8 max-w-7xl mx-auto min-h-screen bg-muted">
       <HeaderSection 
         templates={templates} 
         selectedTemplateName={selectedTemplateName} 
         setSelectedTemplateName={setSelectedTemplateName} 
       />
 
-      <div className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
+      <div className="bg-card rounded-3xl shadow-xl shadow-slate-200/50 border border-border overflow-hidden">
         <FilterSection 
           searchDispatchNo={searchDispatchNo}
           setSearchDispatchNo={setSearchDispatchNo}
